@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import  {TasksService} from './tasks.service'
+
+import { TasksService } from './tasks.service';
 import { TaskComponent } from './task/task.component';
 import { NewtaskComponent } from './newtask/newtask.component';
 
@@ -8,28 +9,24 @@ import { NewtaskComponent } from './newtask/newtask.component';
   standalone:true,
   imports:[TaskComponent,NewtaskComponent],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.css'
+  styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) name!: string;
+  isAddingTask = false;
 
-  isNewTask=false;
+  constructor(private tasksService: TasksService) {}
 
-  constructor(private tasksService: TasksService){
-    this.tasksService = tasksService;
+  get selectedUserTasks() {
+    return this.tasksService.getUserTasks(this.userId);
   }
 
-  get selectedUserTasks(){
-    return this.tasksService.GetUserTask(this.userId);
+  onStartAddTask() {
+    this.isAddingTask = true;
   }
 
-  onCancel(){
-    this.isNewTask = false;
+  onCloseAddTask() {
+    this.isAddingTask = false;
   }
-
-  onAddingTask(){
-    this.isNewTask = true;
-  }
-
 }

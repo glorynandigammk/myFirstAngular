@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { Task } from './task.model';
+import { type Task } from './task.model';
 import { TasksService } from '../tasks.service';
 import { CardComponent } from '../../shared/card/card.component';
 import { DatePipe } from '@angular/common';
@@ -17,6 +17,6 @@ export class TaskComponent {
 private taskService = inject(TasksService);
 
   onCompleteTask(){
-    this.taskService.RemoveUserTask(this.task.id);    
+    this.taskService.removeTask(this.task.id);    
   }
 }

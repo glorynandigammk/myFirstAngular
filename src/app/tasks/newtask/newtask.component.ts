@@ -25,10 +25,10 @@ private tasksService = inject(TasksService);
   }
 
   onSubmit(){
-    this.tasksService.AddUserTask({
+    this.tasksService.addTask({
       title:this.enteredTitle,
       summary:this.enteredSummary,
-      duedate:this.enteredDate
+      date:this.enteredDate
     },this.userId)
     this.close.emit();
   }
